@@ -1,0 +1,25 @@
+@import '@/app/styles/config/variables.scss';
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+
+  .message {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .user-message {
+    align-self: flex-end;
+    background-color: $bg-secondary;
+  }
+
+  .assistant-message {
+    align-self: flex-start;
+  }
+}
