@@ -2,7 +2,7 @@ import {useChatStore} from "@/shared/store/chatsStore.ts";
 import {sendMessageToOpenAI} from "@/shared/api/chats/chatApi.ts";
 
 export const sendChatMessage = async (chatId: string, userMessage: string) => {
-    const { addMessage, chats } = useChatStore.getState();
+    const { addMessage, chats, setWaitingAssistantMsg } = useChatStore.getState();
 
     const userMsg = {
         id: crypto.randomUUID(),
@@ -19,6 +19,8 @@ export const sendChatMessage = async (chatId: string, userMessage: string) => {
         content: m.content,
     }));
 
+    setWaitingAssistantMsg(true);
+
     const assistantResponse = await sendMessageToOpenAI(formattedMessages);
 
     const assistantMsg = {
@@ -27,6 +29,7 @@ export const sendChatMessage = async (chatId: string, userMessage: string) => {
         content: assistantResponse,
     };
 
-    console.log(assistantMsg);
+    setWaitingAssistantMsg(false);
+
     addMessage(chatId, assistantMsg);
 };

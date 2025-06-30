@@ -28,6 +28,9 @@ export const ChatWindow = () => {
                   messages={messages}
               />
               <Input
+                  style={{
+                      marginTop: '10px',
+                  }}
                   label={"Enter text"}
                   value={userMessage}
                   onChange={(e) => setUserMessage(e.target.value)}

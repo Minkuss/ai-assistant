@@ -4,6 +4,7 @@ import { routes } from '@/shared/routes'
 
 import {DashboardPage} from "@/pages/dashboard/ui/page.tsx";
 import {ChatWindow} from "@/entities/chatWindow";
+import {ChatEmpty} from "@/entities/chatEmpty";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>bebra</div>
+        element: <ChatEmpty/>
       },
       {
         path: 'chat/:id',

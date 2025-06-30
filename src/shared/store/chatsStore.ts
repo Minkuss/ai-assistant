@@ -6,6 +6,7 @@ import {Chat} from "@/shared/api/chats/dto/chatDto.ts";
 interface ChatStore {
     chats: Chat[];
     currentChatId: string | null;
+    isWaitingAssistantMsg: boolean;
 
     // actions:
     createChat: (title: string) => void;
@@ -14,6 +15,8 @@ interface ChatStore {
     setCurrentChat: (id: string) => void;
     clearAll: () => void;
     getCurrentChatMessages: () => Message[];
+    renameChat: (id: string, newName: string) => void;
+    setWaitingAssistantMsg: (bool: boolean) => void;
 }
 
 export const useChatStore = create<ChatStore>()(
@@ -21,6 +24,7 @@ export const useChatStore = create<ChatStore>()(
         (set, get) => ({
             chats: [],
             currentChatId: null,
+            isWaitingAssistantMsg: false,
 
             createChat: (title) => {
                 const newChat: Chat = {
@@ -54,6 +58,20 @@ export const useChatStore = create<ChatStore>()(
             getCurrentChatMessages: () => {
                 const currentChat = get().chats.find((chat) => chat.id === get().currentChatId);
                 return currentChat?.messages ?? [];
+            },
+
+            renameChat: (id, newName) => {
+                set({
+                    chats: get().chats.map((chat) =>
+                        chat.id === id
+                            ? { ...chat, title: newName }
+                            : chat
+                    ),
+                })
+            },
+
+            setWaitingAssistantMsg: (bool) => {
+                set({isWaitingAssistantMsg: bool});
             }
         }),
         {

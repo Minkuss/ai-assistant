@@ -3,6 +3,8 @@ import s from './messagesList.module.scss';
 import classNames from "classnames";
 import {Message} from "@/shared/api/chats/dto/messageDto.ts";
 import ReactMarkdown from 'react-markdown';
+import {useChatStore} from "@/shared/store/chatsStore.ts";
+import {TypingAnimation} from "@/shared/ui/typingAnimation/typingAnimation.tsx";
 
 interface IMessagesListProps {
     messages: Message[];
@@ -10,6 +12,7 @@ interface IMessagesListProps {
 
 export const MessagesList = (props: IMessagesListProps) => {
     const { messages } = props;
+    const isWaitingAssistantMsg = useChatStore((state) => state.isWaitingAssistantMsg);
 
     return (
         <Box
@@ -32,6 +35,10 @@ export const MessagesList = (props: IMessagesListProps) => {
                         }
                     </Box>
                 ))
+            }
+            {
+                isWaitingAssistantMsg &&
+                <TypingAnimation/>
             }
         </Box>
     )
