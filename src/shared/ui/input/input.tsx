@@ -15,15 +15,16 @@ const StyledInput = styled(TextField)(() => ({
         transition: 'all 0.2s ease',
         paddingBottom: 4,
 
-        '&:hover:not(.Mui-disabled):before': {
-            borderBottom: '2px solid #888',
+        '&:before, &:after': {
+            borderBottom: 'none !important',
         },
 
-        '&.Mui-focused:before': {
-            borderBottom: '2px solid #555',
+        '&:hover:not(.Mui-disabled)': {
+            borderBottom: '2px solid #000',
         },
 
         '&.Mui-focused': {
+            borderBottom: '2px solid #555',
             boxShadow: '0 2px 0 rgba(0,0,0,0.08)',
         },
     },
@@ -31,7 +32,6 @@ const StyledInput = styled(TextField)(() => ({
     '& .MuiInput-underline:before': {
         borderBottom: 'none',
     },
-
     '& .MuiInput-underline:after': {
         borderBottom: 'none',
     },
@@ -40,11 +40,9 @@ const StyledInput = styled(TextField)(() => ({
         fontSize: 14,
         color: '#777',
     },
-
     '& .MuiFormLabel-root.Mui-focused': {
         color: '#555',
     },
-
     '& .MuiInputBase-input': {
         padding: '6px 0',
     },

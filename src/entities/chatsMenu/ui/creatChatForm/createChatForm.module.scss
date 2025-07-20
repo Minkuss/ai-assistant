@@ -1,0 +1,34 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  transition: gap 0.5s;
+
+  &--hovered {
+    gap: 10px;
+  }
+
+  .create-template-btn {
+    min-width: 0;
+    padding: 0;
+    transition: min-width 0.5s;
+
+    svg {
+      width: 0;
+      transition: width 0.5s;
+    }
+
+    &--hovered {
+      min-width: 64px;
+
+      svg {
+        width: 1em;
+      }
+    }
+  }
+}
