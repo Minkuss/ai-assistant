@@ -20,20 +20,25 @@ export const MessagesList = (props: IMessagesListProps) => {
         >
             {
                 messages.map((message, index) => (
-                    <Box
-                        key={index}
-                        className={classNames(s['message'], s[`${message.role}-message`])}
-                    >
+                    <>
                         {
-                            message.role === 'user'
-                            ? <Typography>
-                                    {message.content}
-                            </Typography>
-                            : <ReactMarkdown>
-                                    {message.content}
-                            </ReactMarkdown>
+                            message.role !== 'system' &&
+                            <Box
+                                key={index}
+                                className={classNames(s['message'], s[`${message.role}-message`])}
+                            >
+                                {
+                                    message.role === 'user'
+                                        ? <Typography>
+                                            {message.content}
+                                        </Typography>
+                                        : <ReactMarkdown>
+                                            {message.content}
+                                        </ReactMarkdown>
+                                }
+                            </Box>
                         }
-                    </Box>
+                    </>
                 ))
             }
             {
