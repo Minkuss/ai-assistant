@@ -19,7 +19,7 @@
     "cy:run": "cypress run",
     "build-storybook": "storybook build",
     "predeploy": "npm run build",
-    "deploy": "main -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
