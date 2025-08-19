@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Minkuss.github.io/ai-assistant",
   "scripts": {
     "prepare": "husky install",
     "dev": "vite",
@@ -17,9 +16,7 @@
     "storybook": "storybook dev -p 6006",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "build-storybook": "storybook build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
