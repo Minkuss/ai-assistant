@@ -28,11 +28,7 @@ export const useChatStore = create<ChatStore>()(
     persist(
         (set, get) => ({
             chats: [],
-            chatTemplates: [{
-                id: crypto.randomUUID(),
-                name: 'Test',
-                prompt: 'Test template'
-            }],
+            chatTemplates: [],
             currentChatId: null,
             isWaitingAssistantMsg: false,
 
