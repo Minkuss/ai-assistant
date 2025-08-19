@@ -1,0 +1,25 @@
+@import '../../../app/styles/config/variables.scss';
+
+.page {
+  display: flex;
+  height: 100%;
+
+  .chat-menu-desktop {
+    display: block;
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  .mobile-menu-button {
+    display: none;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    color: white;
+    @media (max-width: $breakpoint-md) {
+      display: block;
+    }
+  }
+}
