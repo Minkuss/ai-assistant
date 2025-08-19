@@ -10,8 +10,10 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd())
+
   return {
-    base: '/ai-assistant/',
+    base: env.VITE_BASE_URL,
     plugins: [
       react(),
       tsconfigPaths(),
