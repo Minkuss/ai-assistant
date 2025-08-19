@@ -19,7 +19,9 @@ interface ChatStore {
     getCurrentChatMessages: () => Message[];
     renameChat: (id: string, newName: string) => void;
     setWaitingAssistantMsg: (bool: boolean) => void;
-    createTemplate: (name: string, prompt: string) => void;
+    createTemplate: (name: string, prompt: string) => { type: string, msg: string };
+    editTemplate: (id: string, name: string, prompt: string) => void;
+    deleteTemplate: (id: string) => void;
 }
 
 export const useChatStore = create<ChatStore>()(
@@ -97,7 +99,34 @@ export const useChatStore = create<ChatStore>()(
                     name,
                     prompt,
                 };
-                set({ chatTemplates: [...get().chatTemplates, newTemplate] });
+                const maxTemplates = 10;
+                const templatesCount = get().chatTemplates.length;
+                if (templatesCount < maxTemplates) {
+                    set({ chatTemplates: [...get().chatTemplates, newTemplate] });
+                    return {
+                        type: 'success',
+                        msg: 'Template created',
+                    };
+                } else {
+                    return {
+                        type: 'error',
+                        msg: `You can create only ${maxTemplates} templates`,
+                    }
+                }
+            },
+            editTemplate: (id, name, prompt) => {
+                set({
+                    chatTemplates: get().chatTemplates.map((template) =>
+                        template.id === id
+                            ? { ...template, name, prompt }
+                            : template
+                    ),
+                })
+            },
+            deleteTemplate: (id) => {
+                set({
+                    chatTemplates: get().chatTemplates.filter((template) => template.id !== id),
+                })
             }
         }),
         {

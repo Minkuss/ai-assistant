@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
 
 interface ICreateChatFormProps {
-    handleMoveCreateTemplateForm: () => void;
+    handleShowCreateTemplateForm: () => void;
     closeModal: () => void;
 }
 
@@ -21,7 +21,7 @@ interface CreateChatFormInputs {
 }
 
 export const CreateChatForm = (props: ICreateChatFormProps) => {
-    const { handleMoveCreateTemplateForm, closeModal } = props;
+    const { handleShowCreateTemplateForm, closeModal } = props;
     const navigate = useNavigate()
 
     const {
@@ -95,7 +95,7 @@ export const CreateChatForm = (props: ICreateChatFormProps) => {
                         s['create-template-btn'],
                         isSelectHover && s['create-template-btn--hovered'],
                     )}
-                    onClick={handleMoveCreateTemplateForm}
+                    onClick={handleShowCreateTemplateForm}
                 >
                     <AddIcon/>
                 </Button>

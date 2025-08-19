@@ -5,6 +5,7 @@ import { routes } from '@/shared/routes'
 import {DashboardPage} from "@/pages/dashboard/ui/page.tsx";
 import {ChatWindow} from "@/entities/chatWindow";
 import {ChatEmpty} from "@/entities/chatEmpty";
+import {SettingsPage} from "@/pages/settings";
 
 export const router = createBrowserRouter([
   {
@@ -21,4 +22,8 @@ export const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: routes.SETTINGS,
+    element: <SettingsPage/>
+  }
 ])

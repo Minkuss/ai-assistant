@@ -1,9 +1,9 @@
-import {Box, Modal, Typography} from "@mui/material";
+import {Box, IconButton, Modal, Typography} from "@mui/material";
 import s from './createChatModal.module.scss'
 import {CreateChatForm} from "@/entities/chatsMenu/ui/creatChatForm/createChatForm.tsx";
-import {CreateTemplateForm} from "@/entities/chatsMenu/ui/createTemplateForm/createTemplateForm.tsx";
+import {TemplateForm} from "@/shared/ui/templateForm/templateForm.tsx";
 import {useState} from "react";
-import clsx from "clsx";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 interface ICreateChatModalProps {
     isOpen: boolean;
@@ -14,8 +14,12 @@ export const CreateChatModal = (props: ICreateChatModalProps) => {
     const { isOpen, onClose } = props;
     const [ isShowCreateTemplateForm, setShowCreateTemplateForm ] = useState(false);
 
-    const handleMoveCreateTemplateForm = () => {
-        setShowCreateTemplateForm(prev => !prev ?? false);
+    const handleShowCreateTemplateForm = () => {
+        setShowCreateTemplateForm(true);
+    }
+
+    const handleCloseCreateTemplateForm = () => {
+        setShowCreateTemplateForm(false);
     }
 
     return (
@@ -27,32 +31,37 @@ export const CreateChatModal = (props: ICreateChatModalProps) => {
                 className={s['modal-content']}
             >
                 <Box
-                    className={s['create-chat-form']}
+                    className={s['create-form']}
                 >
-                    <Typography
-                        variant={'h5'}
-                        color={'white'}
+                    <div
+                        className={s['header-wrapper']}
                     >
-                        Create a new chat
-                    </Typography>
-                    <CreateChatForm
-                        handleMoveCreateTemplateForm={handleMoveCreateTemplateForm}
-                        closeModal={onClose}
-                    />
-                </Box>
-                <Box
-                    className={clsx(
-                        s['create-template-form'],
-                        isShowCreateTemplateForm && s['create-template-form--show'],
-                    )}
-                >
-                    <Typography
-                        variant={'h5'}
-                        color={'white'}
-                    >
-                        Create a new template
-                    </Typography>
-                    <CreateTemplateForm/>
+                        <Typography
+                            variant={'h5'}
+                            color={'white'}
+                        >
+                            {isShowCreateTemplateForm ? 'Create a new template' : 'Create a new chat'}
+                        </Typography>
+                        {
+                            isShowCreateTemplateForm &&
+                            <IconButton
+                                sx={{
+                                    color: '#fff'
+                                }}
+                                onClick={handleCloseCreateTemplateForm}
+                            >
+                                <ArrowBackIcon/>
+                            </IconButton>
+                        }
+                    </div>
+                    {
+                        isShowCreateTemplateForm
+                            ? <TemplateForm/>
+                            : <CreateChatForm
+                                handleShowCreateTemplateForm={handleShowCreateTemplateForm}
+                                closeModal={onClose}
+                            />
+                    }
                 </Box>
             </Box>
         </Modal>
