@@ -8,13 +8,13 @@
 
 #root {
   height: 100%;
-  background-color: $bg-primary;
 }
 
-body {
+html, body {
   font-family: var(--font-family), sans-serif;
   font-weight: var(--body-font-weight);
   font-size: var(--body-font-size);
   line-height: var(--body-line-height);
-  height: 100vh;
+  height: 100%;
+  background-color: $bg-primary;
 }

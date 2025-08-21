@@ -1,8 +1,15 @@
+@import '../../../../app/styles/config/variables.scss';
+
 .chat-window {
   display: flex;
   flex-direction: column;
+  height: 100vh;
   padding: 20px;
   width: 100%;
+
+  @media (max-width: $breakpoint-md) {
+    height: calc(var(--real-vh, 1vh) * 100);
+  }
 
   .wrapper {
     display: flex;

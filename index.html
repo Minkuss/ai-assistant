@@ -9,5 +9,14 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/app/main.tsx"></script>
+    <script>
+      function setRealVh() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--real-vh', `${vh}px`);
+      }
+      window.addEventListener('resize', setRealVh);
+      window.addEventListener('orientationchange', setRealVh);
+      setRealVh();
+    </script>
   </body>
 </html>
