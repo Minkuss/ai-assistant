@@ -76,7 +76,7 @@ export const CreateChatForm = (props: ICreateChatFormProps) => {
             <div
                 className={clsx(
                     s['select-wrapper'],
-                    isSelectHover && s['select-wrapper--hovered']
+                    (isSelectHover || isPhone) && s['select-wrapper--hovered']
                 )}
                 onMouseEnter={() => setIsSelectHover(true)}
                 onMouseLeave={() => setIsSelectHover(false)}
