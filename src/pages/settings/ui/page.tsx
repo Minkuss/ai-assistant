@@ -1,4 +1,4 @@
-import {Box} from "@mui/material";
+import {Box, Divider} from "@mui/material";
 import {ApiKeyInput} from "@/entities/apiKeyInput";
 import {SettingsHeader} from "@/entities/settingsHeader";
 import {Toaster} from "react-hot-toast";
@@ -10,12 +10,22 @@ export const SettingsPage = () =>
             display={'flex'}
             flexDirection={'column'}
             height={'100%'}
-            gap={'20px'}
-            p={'20px'}
+            gap={'30px'}
         >
             <Toaster/>
             <SettingsHeader/>
             <ApiKeyInput/>
+            <div
+                style={{
+                    padding: '20px'
+                }}
+            >
+                <Divider
+                    sx={{
+                        backgroundColor: '#fff',
+                    }}
+                />
+            </div>
             <TemplateEdit/>
         </Box>
     );

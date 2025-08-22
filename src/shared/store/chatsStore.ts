@@ -33,18 +33,17 @@ export const useChatStore = create<ChatStore>()(
             isWaitingAssistantMsg: false,
 
             createChat: (title, templateId) => {
-                const systemMsg = {
-                    id: crypto.randomUUID(),
-                    role: 'system' as const,
-                    content: get().chatTemplates.find((t) => t.id === templateId)?.prompt ?? '',
-                };
-
                 const newChat: Chat = {
                     id: crypto.randomUUID(),
-                    templateId,
+                    templateId: templateId || undefined,
                     title,
-                    messages: [ systemMsg ],
+                    messages: templateId ? [{
+                        id: crypto.randomUUID(),
+                        role: 'system' as const,
+                        content: get().chatTemplates.find((t) => t.id === templateId)?.prompt ?? '',
+                    }] : [],
                 };
+
                 set({ chats: [...get().chats, newChat], currentChatId: newChat.id });
 
                 return newChat.id;

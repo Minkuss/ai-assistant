@@ -6,7 +6,7 @@ import {useChatStore} from "@/shared/store/chatsStore.ts";
 import toast from "react-hot-toast";
 import {Select} from "@/shared/ui/select/select.tsx";
 import {useEffect} from "react";
-import {Box} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 
 interface TemplateFormProps {
     isEdit?: boolean;
@@ -85,22 +85,33 @@ export const TemplateForm = (props: TemplateFormProps) => {
     return (
         <form
             className={s['form-container']}
+            style={isEdit ? {
+                padding: '20px',
+            } : {}}
             onSubmit={handleSubmit(onSubmit)}
         >
             {
                 isEdit &&
-                <Controller
-                    name="chatTemplateId"
-                    control={control}
-                    render={({ field }) => (
-                        <Select
-                            label="Choose template"
-                            required={true}
-                            options={options}
-                            {...field}
-                        />
-                    )}
-                />
+                <div>
+                    <Typography
+                        variant={'h5'}
+                        className={s['form-title']}
+                    >
+                        Edit templates
+                    </Typography>
+                    <Controller
+                        name="chatTemplateId"
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                                label="Choose template"
+                                required={true}
+                                options={options}
+                                {...field}
+                            />
+                        )}
+                    />
+                </div>
             }
             <Controller
                 control={control}
@@ -127,11 +138,13 @@ export const TemplateForm = (props: TemplateFormProps) => {
             <Box
                 sx={{
                     display: 'grid',
+                    gap: '10px',
                     gridTemplateColumns: `1fr ${isEdit ? '1fr' : ''}`,
                 }}
             >
                 <Button
                     type={'submit'}
+                    className={isEdit ? s['edit-template-button'] : ''}
                 >
                     {`${isEdit ? 'Edit' : 'Create'} template`}
                 </Button>
@@ -139,6 +152,7 @@ export const TemplateForm = (props: TemplateFormProps) => {
                     isEdit &&
                     <Button
                         onClick={handleDeleteTemplate}
+                        className={s['delete-template-button']}
                     >
                         Delete template
                     </Button>

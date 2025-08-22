@@ -1,6 +1,6 @@
 import { Input } from '@/shared/ui/input/input';
 import s from './createChatForm.module.scss';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import clsx from "clsx";
 import { Select } from '@/shared/ui/select/select';
 import { Button } from '@/shared/ui/button/button';
@@ -36,6 +36,7 @@ export const CreateChatForm = (props: ICreateChatFormProps) => {
     })
 
     const [ isSelectHover, setIsSelectHover ] = useState(false);
+    const [ isPhone, setIsPhone ] = useState(false);
     const chatTemplates = useChatStore((store) => store.chatTemplates);
     const createChat = useChatStore((state) => state.createChat);
 
@@ -51,6 +52,10 @@ export const CreateChatForm = (props: ICreateChatFormProps) => {
         navigate(`/chat/${chatId}`);
         closeModal();
     }
+
+    useEffect(() => {
+        setIsPhone(window.innerWidth <= 768);
+    }, []);
 
     return (
         <form
@@ -84,7 +89,6 @@ export const CreateChatForm = (props: ICreateChatFormProps) => {
                     render={({ field }) => (
                         <Select
                             label="Choose template"
-                            required={true}
                             options={options}
                             {...field}
                         />
@@ -93,7 +97,7 @@ export const CreateChatForm = (props: ICreateChatFormProps) => {
                 <Button
                     className={clsx(
                         s['create-template-btn'],
-                        isSelectHover && s['create-template-btn--hovered'],
+                        (isSelectHover || isPhone) && s['create-template-btn--hovered'],
                     )}
                     onClick={handleShowCreateTemplateForm}
                 >

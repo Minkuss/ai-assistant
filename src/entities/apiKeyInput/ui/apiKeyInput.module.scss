@@ -1,17 +1,12 @@
 @import "../../../app/styles/config/variables.scss";
 
-.form-container {
+.wrapper {
   display: flex;
   flex-direction: column;
-  gap: 19px;
+  padding: 20px;
+  gap: 10px;
 
-  .form-title {
-    color: #fff;
-  }
-
-  .edit-template-button,
-  .delete-template-button
-  {
+  .button {
     background-color: $bg-secondary;
   }
 }

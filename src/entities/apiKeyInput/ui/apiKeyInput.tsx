@@ -2,6 +2,8 @@ import { Input } from "@/shared/ui/input/input"
 import {Box} from "@mui/material";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
+import {Button} from "@/shared/ui/button/button.tsx";
+import s from './apiKeyInput.module.scss'
 
 export const ApiKeyInput = () => {
     const [ apiKey, setApiKey ] = useState('');
@@ -20,7 +22,9 @@ export const ApiKeyInput = () => {
     }
 
     return (
-        <Box>
+        <Box
+            className={s['wrapper']}
+        >
             <Input
                 label={'API Key'}
                 placeholder={'sk-...'}
@@ -31,7 +35,14 @@ export const ApiKeyInput = () => {
                         handleSaveApiKey();
                     }
                 }}
+                onBlur={handleSaveApiKey}
             />
+            <Button
+                className={s['button']}
+                onClick={handleSaveApiKey}
+            >
+                Save
+            </Button>
         </Box>
     )
 }
